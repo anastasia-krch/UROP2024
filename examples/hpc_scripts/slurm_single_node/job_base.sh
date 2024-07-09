@@ -27,7 +27,7 @@ export SRUN_CPUS_PER_TASK=1
 
 ## We assume i-pi (and the driver code) are in the path, otherwise
 ## you have to set this environment variable
-IPI_PATH= 
+IPI_PATH= /i-pi
 
 ## Input file
 IPI_INPUT=input.xml
