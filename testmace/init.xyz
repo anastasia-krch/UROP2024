@@ -1,5 +1,5 @@
 96
-# positions{angstrom}
+# CELL(abcABC): 1.800 1.800 2.633 90.0 90.0 90.0 Step: 25 Bead: 25 positions{angstrom} cell{angstrom}
 C 2.875559 0.483246 0.041333
 C 1.338918 1.083039 4.186369
 C 1.779350 1.331254 0.976998
