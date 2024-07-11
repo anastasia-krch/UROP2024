@@ -1,0 +1,68 @@
+
+ ____       ____       ____       ____
+/    \     /    \     /    \     /    \
+|  #################################  |
+\__#_/     \____/     \____/     \_#__/
+   #    _        _______  _____    #
+   #   (_)      |_   __ \|_   _|   #      -*-     v 3.0.0-beta  -*-
+   #   __  ______ | |__) | | |     #
+   Y  [  ||______||  ___/  | |     #      A Universal Force Engine
+  0 0  | |       _| |_    _| |_    #
+   #  [___]     |_____|  |_____|   #
+ __#_       ____       ____       _#__
+/  # \     /    \     /    \     / #  \
+|  #################################  |
+\____/     \____/     \____/     \____/
+
+    
+<ipi.inputs.motion.dynamics.InputDynamics object at 0x7f70c5006890>
+ # Initializing system object 
+ # Initializing simulation object 
+ # Initializer (stage 1) parsing positions object.
+ # Initializing from file h5o2+.xyz. Dimension: length, units: angstrom, cell_units: automatic
+ # Interpreting input with dimension length, units angstrom and cell units angstrom
+ # Initialize is rescaling from     1 beads to    16 beads
+ # Initializer (stage 1) parsing masses object.
+ # Initializing from file h5o2+.xyz. Dimension: length, units: automatic, cell_units: automatic
+ # Interpreting input with dimension length, units angstrom and cell units angstrom
+ # Initializer (stage 1) parsing labels object.
+ # Initializing from file h5o2+.xyz. Dimension: length, units: automatic, cell_units: automatic
+ # Interpreting input with dimension length, units angstrom and cell units angstrom
+ # Initializer (stage 1) parsing cell object.
+ # Initializing from file h5o2+.xyz. Dimension: length, units: automatic, cell_units: automatic
+ # Interpreting input with dimension length, units angstrom and cell units angstrom
+ # Initializing from file h5o2+.xyz. Dimension: length, units: automatic, cell_units: automatic
+ # Interpreting input with dimension length, units angstrom and cell units angstrom
+ # Initializer (stage 1) parsing cell object.
+ !W! Overwriting previous cell parameters
+ !W! Momenta not specified in initialize. Will start with zero velocity if they are not specified in beads.
+ # Binding the forces 
+Import of PyFFTW unsuccessful, using NumPy library instead. 
+ !W! Install PyFFTW to avoid slow normal-modes integration
+ # Initializer (stage 2) parsing positions object.
+ # Initializer (stage 2) parsing masses object.
+ # Initializer (stage 2) parsing labels object.
+ # Initializer (stage 2) parsing cell object.
+ # Initializer (stage 2) parsing cell object.
+Traceback (most recent call last):
+  File "/home/ak2921/i-pi/ipi/interfaces/sockets.py", line 655, in open
+    self.server.bind(self.sockets_prefix + self.address)
+OSError: [Errno 98] Address already in use
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ak2921/i-pi/bin/i-pi", line 115, in <module>
+    main(args[0], options)
+  File "/home/ak2921/i-pi/bin/i-pi", line 61, in main
+    simulation = Simulation.load_from_xml(fn_input, request_banner=True, custom_verbosity=options.verbosity, sockets_prefix=options.sockets_prefix)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ak2921/i-pi/ipi/engine/simulation.py", line 107, in load_from_xml
+    simulation.bind(read_only)
+  File "/home/ak2921/i-pi/ipi/engine/simulation.py", line 216, in bind
+    f.start()
+  File "/home/ak2921/i-pi/ipi/engine/forcefields.py", line 352, in start
+    self.socket.open()
+  File "/home/ak2921/i-pi/ipi/interfaces/sockets.py", line 660, in open
+    raise RuntimeError(
+RuntimeError: Error opening unix socket. Check if a file /tmp/ipi_slurm-one-node exists, and remove it if unused.
