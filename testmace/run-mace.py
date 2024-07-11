@@ -3,7 +3,7 @@ from mace.calculators import mace_mp
 from ase.calculators.socketio import SocketClient
 
 # Define atoms object
-atoms = read("init.pdb", 0)
+atoms = read("init.xyz", 0)
 
 # Set ASE calculator #################
 calcs = []
