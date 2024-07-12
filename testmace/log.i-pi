@@ -15,7 +15,7 @@
 \____/     \____/     \____/     \____/
 
     
-<ipi.inputs.motion.dynamics.InputDynamics object at 0x7fa13f522510>
+<ipi.inputs.motion.dynamics.InputDynamics object at 0x7fb9666c4890>
  # Initializing system object 
  # Initializing simulation object 
  # Initializing from file init.xyz. Dimension: length, units: automatic, cell_units: automatic
@@ -28,9 +28,30 @@
 Created unix socket with address driver
  @ForceField: Starting the polling thread main loop.
  # i-PI loaded input file:  input.xml
- !W!  @SOFTEXIT:   Kill signal. Trying to make a clean exit.
-SOFTEXIT CALLED FROM THREAD <_MainThread(MainThread, started 140333287188288)>  @SOFTEXIT: Kill signal received
- !W! Soft exit has been requested with message: ' @SOFTEXIT: Kill signal received
-Restartable as is: YES.'. Cleaning up.
-SOFTEXIT CALLED FROM THREAD <Thread(ThreadPoolExecutor-1_0, started 140330498594496)>  @ FORCES : cannot return so will die off here
+ @SOCKET:   Client asked for connection from . Now hand-shaking.
+ @SOCKET:   Handshaking was successful. Added to the client list.
+ # Average timings at MD step       0. t/step: 3.61906e-01
+ # Average timings at MD step     100. t/step: 9.26296e-01
+ # Average timings at MD step     200. t/step: 8.72720e-01
+ # Average timings at MD step     300. t/step: 1.33401e+00
+ # Average timings at MD step     400. t/step: 7.61155e-01
+ # Average timings at MD step     500. t/step: 5.46963e-01
+ # Average timings at MD step     600. t/step: 7.23117e-01
+ # Average timings at MD step     700. t/step: 8.87102e-01
+ # Average timings at MD step     800. t/step: 1.03245e+00
+ # Average timings at MD step     900. t/step: 1.15747e+00
+ # Average timings at MD step    1000. t/step: 1.25774e+00
+ # Average timings at MD step    1100. t/step: 1.34361e+00
+ # Average timings at MD step    1200. t/step: 1.41170e+00
+ # Average timings at MD step    1300. t/step: 1.46629e+00
+ # Average timings at MD step    1400. t/step: 1.51140e+00
+ # Average timings at MD step    1500. t/step: 1.54579e+00
+ # Average timings at MD step    1600. t/step: 1.57404e+00
+ # Average timings at MD step    1700. t/step: 1.59379e+00
+ # Average timings at MD step    1800. t/step: 1.61197e+00
+ # Average timings at MD step    1900. t/step: 1.62491e+00
+SOFTEXIT CALLED FROM THREAD <_MainThread(MainThread, started 140437026572096)>  @ SIMULATION: Exiting cleanly.
+ !W! Soft exit has been requested with message: ' @ SIMULATION: Exiting cleanly.
+I-PI reports success. Restartable as is: NO.'. Cleaning up.
  @SOCKET: Shutting down the driver interface.
+SOFTEXIT: Saving the latest status at the end of the step
