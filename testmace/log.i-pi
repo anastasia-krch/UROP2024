@@ -15,7 +15,7 @@
 \____/     \____/     \____/     \____/
 
     
-<ipi.inputs.motion.dynamics.InputDynamics object at 0x7f2e01400350>
+<ipi.inputs.motion.dynamics.InputDynamics object at 0x7faf5ec72410>
  # Initializing system object 
  # Initializing simulation object 
  # Initializing from file init.xyz. Dimension: length, units: automatic, cell_units: automatic
@@ -30,28 +30,29 @@ Created unix socket with address driver
  # i-PI loaded input file:  input.xml
  @SOCKET:   Client asked for connection from . Now hand-shaking.
  @SOCKET:   Handshaking was successful. Added to the client list.
- # Average timings at MD step       0. t/step: 3.53877e-01
- # Average timings at MD step     100. t/step: 1.16809e-01
- # Average timings at MD step     200. t/step: 4.93901e-02
- # Average timings at MD step     300. t/step: 4.99179e-02
- # Average timings at MD step     400. t/step: 4.96653e-02
- # Average timings at MD step     500. t/step: 4.17976e-02
- # Average timings at MD step     600. t/step: 3.43334e-02
- # Average timings at MD step     700. t/step: 3.43178e-02
- # Average timings at MD step     800. t/step: 3.47924e-02
- # Average timings at MD step     900. t/step: 3.42767e-02
- # Average timings at MD step    1000. t/step: 3.46853e-02
- # Average timings at MD step    1100. t/step: 3.38720e-02
- # Average timings at MD step    1200. t/step: 3.46181e-02
- # Average timings at MD step    1300. t/step: 3.69100e-02
- # Average timings at MD step    1400. t/step: 3.85837e-02
- # Average timings at MD step    1500. t/step: 3.73417e-02
- # Average timings at MD step    1600. t/step: 3.78372e-02
- # Average timings at MD step    1700. t/step: 3.78238e-02
- # Average timings at MD step    1800. t/step: 3.82428e-02
- # Average timings at MD step    1900. t/step: 3.73199e-02
-SOFTEXIT CALLED FROM THREAD <_MainThread(MainThread, started 139838334068544)>  @ SIMULATION: Exiting cleanly.
+ # Average timings at MD step       0. t/step: 3.60884e-01
+ # Average timings at MD step     100. t/step: 1.17283e-01
+ # Average timings at MD step     200. t/step: 4.99208e-02
+ # Average timings at MD step     300. t/step: 5.02072e-02
+ # Average timings at MD step     400. t/step: 5.03394e-02
+ # Average timings at MD step     500. t/step: 4.96003e-02
+ # Average timings at MD step     600. t/step: 4.98661e-02
+ # Average timings at MD step     700. t/step: 5.01743e-02
+ # Average timings at MD step     800. t/step: 5.06177e-02
+ # Average timings at MD step     900. t/step: 5.03325e-02
+ # Average timings at MD step    1000. t/step: 5.03814e-02
+ # Average timings at MD step    1100. t/step: 4.97657e-02
+ # Average timings at MD step    1200. t/step: 5.02741e-02
+ # Average timings at MD step    1300. t/step: 4.93967e-02
+ # Average timings at MD step    1400. t/step: 4.98117e-02
+ # Average timings at MD step    1500. t/step: 4.98934e-02
+ # Average timings at MD step    1600. t/step: 5.03407e-02
+ # Average timings at MD step    1700. t/step: 4.99976e-02
+ # Average timings at MD step    1800. t/step: 5.02488e-02
+ # Average timings at MD step    1900. t/step: 4.95028e-02
+SOFTEXIT CALLED FROM THREAD <_MainThread(MainThread, started 140393938937664)>  @ SIMULATION: Exiting cleanly.
  !W! Soft exit has been requested with message: ' @ SIMULATION: Exiting cleanly.
 I-PI reports success. Restartable as is: NO.'. Cleaning up.
  @SOCKET: Shutting down the driver interface.
 SOFTEXIT: Saving the latest status at the end of the step
+Backup performed: RESTART -> #RESTART#0#
