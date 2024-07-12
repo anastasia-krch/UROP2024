@@ -15,7 +15,7 @@
 \____/     \____/     \____/     \____/
 
     
-<ipi.inputs.motion.dynamics.InputDynamics object at 0x7fb720620110>
+<ipi.inputs.motion.dynamics.InputDynamics object at 0x7fa13f522510>
  # Initializing system object 
  # Initializing simulation object 
  # Initializing from file init.xyz. Dimension: length, units: automatic, cell_units: automatic
@@ -28,30 +28,9 @@
 Created unix socket with address driver
  @ForceField: Starting the polling thread main loop.
  # i-PI loaded input file:  input.xml
- @SOCKET:   Client asked for connection from . Now hand-shaking.
- @SOCKET:   Handshaking was successful. Added to the client list.
- # Average timings at MD step       0. t/step: 3.63442e-01
- # Average timings at MD step     100. t/step: 6.22378e-01
- # Average timings at MD step     200. t/step: 9.25195e-01
- # Average timings at MD step     300. t/step: 8.88616e-01
- # Average timings at MD step     400. t/step: 1.74284e+00
- # Average timings at MD step     500. t/step: 3.79692e-01
- # Average timings at MD step     600. t/step: 4.96554e-01
- # Average timings at MD step     700. t/step: 6.03346e-01
- # Average timings at MD step     800. t/step: 6.99508e-01
- # Average timings at MD step     900. t/step: 7.84017e-01
- # Average timings at MD step    1000. t/step: 8.50982e-01
- # Average timings at MD step    1100. t/step: 9.08045e-01
- # Average timings at MD step    1200. t/step: 9.56811e-01
- # Average timings at MD step    1300. t/step: 9.93760e-01
- # Average timings at MD step    1400. t/step: 1.02668e+00
- # Average timings at MD step    1500. t/step: 1.05342e+00
- # Average timings at MD step    1600. t/step: 1.07564e+00
- # Average timings at MD step    1700. t/step: 1.09842e+00
- # Average timings at MD step    1800. t/step: 1.11701e+00
- # Average timings at MD step    1900. t/step: 1.13284e+00
-SOFTEXIT CALLED FROM THREAD <_MainThread(MainThread, started 140427204761408)>  @ SIMULATION: Exiting cleanly.
- !W! Soft exit has been requested with message: ' @ SIMULATION: Exiting cleanly.
-I-PI reports success. Restartable as is: NO.'. Cleaning up.
+ !W!  @SOFTEXIT:   Kill signal. Trying to make a clean exit.
+SOFTEXIT CALLED FROM THREAD <_MainThread(MainThread, started 140333287188288)>  @SOFTEXIT: Kill signal received
+ !W! Soft exit has been requested with message: ' @SOFTEXIT: Kill signal received
+Restartable as is: YES.'. Cleaning up.
+SOFTEXIT CALLED FROM THREAD <Thread(ThreadPoolExecutor-1_0, started 140330498594496)>  @ FORCES : cannot return so will die off here
  @SOCKET: Shutting down the driver interface.
-SOFTEXIT: Saving the latest status at the end of the step
