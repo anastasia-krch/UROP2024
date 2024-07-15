@@ -1,10 +1,10 @@
 <simulation verbosity='medium'>
   <output prefix='simulation'>
-    <properties filename='out' stride='40' flush='10'>  [ step, time{picosecond}, conserved, temperature{kelvin}, potential ] </properties>
+    <properties filename='out' stride='50' flush='10'>  [ step, time{picosecond}, conserved, temperature{kelvin}, potential ] </properties>
     <trajectory filename='pos' stride='4' flush='100' format='ase'> positions </trajectory>
     <checkpoint stride='200'/>
   </output>
-  <total_steps> 20000 </total_steps>
+  <total_steps> 2000000 </total_steps>
   <prng>
     <seed>32415</seed>
   </prng>
