@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/home/ak2921/i-pi/bin/i-pi", line 30, in <module>
-    from ipi.utils.softexit import softexit
-  File "/home/ak2921/i-pi/ipi/__init__.py", line 6, in <module>
-    from ipi.utils.parsing import read_output, read_trajectory
-  File "/home/ak2921/i-pi/ipi/utils/parsing.py", line 10, in <module>
-    import numpy as np
-ModuleNotFoundError: No module named 'numpy'

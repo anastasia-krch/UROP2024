@@ -1,3 +1,0 @@
-#Settings file for automatic test
-driver_model sg
-flags -o 15.0
