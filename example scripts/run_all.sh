@@ -1,76 +1,80 @@
-#!/bin/bash
+import ase
+from ase.calculators.emt import EMT
+from ase.constraints import FixAtoms
+from ase.io import read
+from ase.mep import NEB
+from mace.calculators import mace_off
+from ase.optimize import BFGS
+from ase import Atoms
+from ase.io import read, write
 
-# Declare directories of individual simulations, input driver names, steps, temperature, and beads
-declare -A directories=(
-    ["C60"]="driver_4 200000 500 1"
-    ["C180"]="driver_5 300000 600 2"
-)
+# Read initial and final structures
+MD_file_name_initial = 'initial.xyz'
+MD_file_name_final = 'final.xyz'
+atoms_initial = ase.io.read(MD_file_name_initial, format='xyz')
+atoms_final = ase.io.read(MD_file_name_final, format='xyz')
 
-# Function to run job in a directory
-run_job() {
-    dir=$1
-    driver=$2
-    steps=$3
-    temp=$4
-    beads=$5
-    echo "Running job in $dir with driver $driver, steps=$steps, temperature=$temp, nbeads=$beads"
-    cd $dir
+# Set up calculators for initial and final images
+calc_initial = mace_off(model="medium", device="cuda", default_dtype="float64")
+calc_final = mace_off(model="medium", device="cuda", default_dtype="float64")
 
-    # Ensure run.sh is executable
-    chmod +x run.sh
+atoms_initial.calc = calc_initial
+atoms_final.calc = calc_final
 
-    # Create input file with parameters
-    cat > input.xml <<EOF
-<simulation verbosity='medium'>
-  <output prefix='simulation'>
-    <properties filename='out' stride='50' flush='10'>  [ step, time{picosecond}, conserved, temperature{kelvin}, potential ] </properties>
-    <trajectory filename='pos' stride='50' flush='100' format='ase'> positions </trajectory>
-    <checkpoint stride='200'/>
-  </output>
-  <total_steps> ${steps} </total_steps>
-  <prng>
-    <seed>32415</seed>
-  </prng>
-  <ffsocket name='maceoff23' mode='unix' pbc='false'>
-    <address> ${driver} </address>
-  </ffsocket>
-  <system>
-    <initialize nbeads='${beads}'>
-      <file mode='xyz'> init.xyz </file>
-      <velocities mode='thermal' units='kelvin'> 400 </velocities>
-    </initialize>
-    <forces>
-      <force forcefield='maceoff23' weight='1'> </force>
-    </forces>
-    <motion mode='dynamics'>
-      <fixcom> True </fixcom>
-      <dynamics mode='nvt'>
-        <timestep units='femtosecond'> 0.5</timestep>
-        <thermostat mode='svr'>
-          <tau units='femtosecond'> 100 </tau>
-        </thermostat>
-      </dynamics>
-    </motion>
-    <ensemble>
-      <temperature units='kelvin'> ${temp} </temperature>
-    </ensemble>
-  </system>
-</simulation>
-EOF
+# Optimize the initial and final structures
+qn = BFGS(atoms_initial, trajectory='initial.traj')
+qn.run(fmax=0.05)
+qn = BFGS(atoms_final, trajectory='final.traj')
+qn.run(fmax=0.05)
 
-    # Pass the driver name to run.sh
-    ./run.sh $driver &
+initial = read('initial.traj')
+final = read('final.traj')
 
-    cd -  # Go back to the original directory
-}
+# Generate intermediate images
+n_images = 5  # General number of images
+images = [initial]
+for i in range(1, n_images):
+    image = initial.copy()
+    image.calc = mace_off(model="medium", device="cuda", default_dtype="float64")
+    images.append(image)
+images.append(final)
 
-# Run jobs in parallel
-for dir in "${!directories[@]}"; do
-    params=(${directories[$dir]})
-    run_job $dir "${params[0]}" "${params[1]}" "${params[2]}" "${params[3]}" &
-done
+# Create NEB object and interpolate to initialize the path
+neb = NEB(images)
+neb.interpolate()
 
-# Wait for all background jobs to complete
-wait
+# Refine the path by inserting additional images between specific pairs
+refined_images = []
 
-echo "All tasks completed."
+n_refined = 5  # Number of additional images to add between each pair
+
+for i in range(2):  # Loop over the first 2 pairs
+    refined_images.append(images[i])  # Add the original image
+
+    # Create and insert n_refined images between images[i] and images[i+1]
+    for j in range(1, n_refined + 1):
+        new_image = Atoms(
+            symbols=images[i].get_chemical_symbols(),
+            positions=(1 - j / (n_refined + 1)) * images[i].get_positions() + (j / (n_refined + 1)) * images[i + 1].get_positions(),
+            cell=images[i].get_cell(),
+            pbc=images[i].get_pbc()
+        )
+        new_image.calc = calc_final
+
+        # Optimize each newly created image
+        qn = BFGS(new_image, trajectory='new_image.traj')
+        qn.run(fmax=0.05)
+        new_image = read('new_image.traj')
+        new_image.calc = mace_off(model="medium", device="cuda", default_dtype="float64")
+        refined_images.append(new_image)
+
+# Add the remaining images (from image 2 onwards)
+refined_images.extend(images[2:])
+
+# Create a new NEB object with the refined set of images
+neb_refined = NEB(refined_images)
+neb_refined.interpolate()
+
+# Run the NEB optimization
+qn = BFGS(neb_refined, trajectory='neb.traj')
+qn.run(fmax=0.05)
