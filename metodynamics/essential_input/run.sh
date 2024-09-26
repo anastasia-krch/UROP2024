@@ -15,4 +15,4 @@ echo "Plumed is located at: $plumed_path"
 
 i-pi RESTART &> log.i-pi & 
 sleep 2
-python run-mace.py -u -a driver-works-400 -m driver-works-400
+python run-mace.py -u -a driver -m driver
