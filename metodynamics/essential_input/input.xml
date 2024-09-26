@@ -1,0 +1,82 @@
+<simulation safe_stride='10' verbosity='medium'>
+    <ffsocket name='macemp' mode='unix' pbc='false'>
+    <address> driver-works-400 </address>
+  </ffsocket>
+
+   <ffplumed name="plumed"> 
+         <file mode="xyz">init.xyz</file>
+         <plumeddat> plumed-md.dat </plumeddat> 
+<plumed_extras> [d0, mtd.bias ] </plumed_extras> 
+	</ffplumed>
+
+
+
+   <total_steps>1000000</total_steps>
+   <output prefix="meta-md">
+      <trajectory stride="10" filename="pos" cell_units="angstrom">positions{angstrom}</trajectory>
+      <trajectory stride="10" filename="colvar" bead="0" extra_type="d0,uwall,mtd.bias"> extras_bias </trajectory>
+      <properties stride="10"> 
+      [ step, time, conserved, temperature{kelvin}, kinetic_md, 
+        potential, temperature{kelvin}(H), temperature{kelvin}(O), ensemble_bias ] 
+      </properties>
+   </output>
+
+   <prng>
+      <seed>18885</seed>
+   </prng>
+
+
+   <system>
+      <forces> 
+          <force forcefield="macemp"></force>
+      </forces>
+
+
+      <initialize nbeads="1">
+        <file mode="xyz">init.xyz</file>
+      </initialize>
+
+
+      <ensemble>
+         <temperature units="kelvin"> 400.0 </temperature>
+         <bias>
+            <force forcefield="plumed"/>
+         </bias>
+      </ensemble>
+
+
+      <motion mode="dynamics">
+        <fixcom> False </fixcom>
+        <dynamics mode="nvt" splitting="baoab">
+         <timestep units="femtosecond"> 1 </timestep>
+<!--
+# Generated at http://cosmo-epfl.github.io/gle4md
+# Please cite:
+# M. Ceriotti, G. Bussi and M. Parrinello, J. Chem. Theory Comput. 6, 1170 (2010) 
+# M. Ceriotti, G. Bussi and M. Parrinello, Phys. Rev. Lett. 102, 020601 (2009)
+# Smart-sampling GLE. Enforces efficient sampling, focussing the effort on the slowest mode 
+# accessible by the simulation. Generated from the parameter file
+# library/smart/smart-0.5_6-2.a, 
+# and shifted so that they are effective to sample optimally 
+# a time scale of t_opt=1 picoseconds,
+# and do as well as possible upt to a cutoff frequency of 
+# ?max=100 THz [3336 cm^-1]
+-->  
+
+
+
+  <thermostat mode='gle'>
+    <A shape='(5,5)'>
+      [   1.757680902333e-2,   -1.184055284309e-4,    7.153674389911e-4,   -4.024668981094e-3,    9.103303957091e-3, 
+   1.940473073881e-4,    3.078864284605e-6,   -8.315397649291e-5,   -1.291777509475e-4,    8.941450849851e-5, 
+   5.406191820462e-4,    8.315397649291e-5,    2.542481037210e-4,    3.888767693159e-4,    3.985078096678e-4, 
+  -1.120522936114e-3,    1.291777509475e-4,   -3.888767693159e-4,    2.125910953291e-3,    1.251295704419e-3, 
+   9.876265622015e-3,   -8.941450849851e-5,   -3.985078096678e-4,   -1.251295704419e-3,    7.236286805792e-3
+     ]
+    </A>
+  </thermostat>        </dynamics>
+      </motion>
+  </system>
+  <smotion mode="metad"> //starts metadynamics definition
+     <metad> <metaff> [ plumed ] </metaff> </metad>   </smotion>
+</simulation>
