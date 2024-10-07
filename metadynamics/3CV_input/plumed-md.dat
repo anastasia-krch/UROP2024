@@ -1,0 +1,10 @@
+# Track the distance between the oxygen atom of water (atom 1) and the origin (0,0,0)
+a:  COM ATOMS=4-63
+d: DISTANCE ATOMS=1,a COMPONENTS NOPBC
+# Apply metadynamics bias on the distance from the origin and other CVs
+mtd: METAD ARG=d.x,d.y,d.z PACE=500 SIGMA=0.1,0.1,0.1 HEIGHT=1 FILE=HILLS-md BIASFACTOR=20 TEMP=100
+uwall: UPPER_WALLS ARG=d.x AT=1.5 KAPPA=250
+
+# Output printed data
+PRINT ARG=d.x,d.y,d.z,mtd.* STRIDE=10 FILE=COLVAR-md
+FLUSH STRIDE=1
