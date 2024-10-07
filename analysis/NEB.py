@@ -15,11 +15,10 @@ atoms_initial = ase.io.read(MD_file_name_initial, format='xyz')
 atoms_final = ase.io.read(MD_file_name_final, format='xyz')
 
 # Set up calculators for initial and final images
-calc_initial = mace_off(model="medium", device="cuda", default_dtype="float64")
-calc_final = mace_off(model="medium", device="cuda", default_dtype="float64")
+calc = mace_mp(model="medium", device="cuda", default_dtype="float64")
 
-atoms_initial.calc = calc_initial
-atoms_final.calc = calc_final
+atoms_initial.calc = calc
+atoms_final.calc = calc
 
 # Optimize the initial and final structures
 qn = BFGS(atoms_initial, trajectory='initial.traj')
@@ -27,11 +26,11 @@ qn.run(fmax=0.05)
 qn = BFGS(atoms_final, trajectory='final.traj')
 qn.run(fmax=0.05)
 
-initial = read('initial.traj')
+initial = read('initial.traj')#we need to rewrite from xyz to traj
 final = read('final.traj')
 
 # Generate intermediate images
-n_images = 5  # General number of images
+n_images = 15  # General number of images
 images = [initial]
 for i in range(1, n_images):
     image = initial.copy()
