@@ -21,20 +21,18 @@ def objective_function(angles, atoms, fulleroid, water, x, y, z, calc):
     
     combined_atoms.set_calculator(calc)
     
-    # Perform an energy calculation
     potential_energy = combined_atoms.get_potential_energy()
     
     return potential_energy
 
 def calculate_energy_landscape(input_file, output_file, spacing=1.0, angle_increment=10.0):
-    # Load the atomic structure (fullerene + water)
     atoms = read(input_file)
 
-    # Assuming first three atoms are water
+    # first three atoms needs to be water
     water = atoms[:3]
     fulleroid = atoms[3:]
 
-    # Determine the bounding box of the fullerene
+    # bounding box of the fullerene
     min_corner = np.min(fulleroid.get_positions(), axis=0)
     max_corner = np.max(fulleroid.get_positions(), axis=0)
 
