@@ -38,7 +38,6 @@ def distance_vs_time(simulation_path, fullerene_path):
         distances.append(distance)
         times.append(ts.time)
 
-    # Convert lists to numpy arrays
     distances = np.array(distances)
     times = np.array(times)
     return distances, times
